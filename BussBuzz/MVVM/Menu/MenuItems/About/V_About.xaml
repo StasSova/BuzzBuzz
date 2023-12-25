@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BussBuzz.MVVM.Menu.MenuItems.About.V_About"
+             
+             xmlns:vm="clr-namespace:BussBuzz.MVVM.Menu.MenuItems.About"
+             xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+             Title="About"
+             >
+
+    <ContentPage.Resources>
+
+        <Style x:Key="TitleTextStyle" TargetType="md:Label">
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="ForegroundColor" Value="{DynamicResource OnPrimaryContainerColor}"/>
+            <Setter Property="FontFamily" Value="Metropolis Medium" />
+            <Setter Property="Margin" Value="0, 15, 0, 0" />
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+
+        <Style x:Key="LogoTitleTextStyle" TargetType="md:Label">
+            <Setter Property="FontSize" Value="48" />
+            <Setter Property="ForegroundColor" Value="{DynamicResource OnBackgroundColor}"/>
+            <Setter Property="FontFamily" Value="" />
+            
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+
+        <Style x:Key="TitleTextStyleBig" TargetType="md:Label">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="ForegroundColor" Value="{DynamicResource SecondaryColor}"/>
+            <Setter Property="FontWeight" Value="500"/>
+            <Setter Property="FontFamily" Value="" />
+            
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+
+        <Style x:Key="TitleTextStyleSmall" TargetType="md:Label">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="ForegroundColor" Value="{DynamicResource SecondaryColor}"/>
+            <Setter Property="FontWeight" Value="400"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontFamily" Value="Metropolis Medium" />
+
+        </Style>
+
+
+        <Style x:Key="RecentChatAdornerStyle" TargetType="BoxView">
+            <Setter Property="Color" Value="{DynamicResource BackgroundColor}" />
+            <Setter Property="CornerRadius" Value="0" />
+        </Style>
+
+        <Style x:Key="RecentChatCollectionStyle" TargetType="CollectionView">
+            <Setter Property="Margin" Value="12, 24, 12, 0" />
+        </Style>
+
+
+        <Style x:Key="RecentImageContainerStyle" TargetType="Grid">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HeightRequest" Value="72" />
+            <Setter Property="WidthRequest" Value="72" />
+        </Style>
+
+        <Style x:Key="RecentEllipseStyle" TargetType="Ellipse">
+            <Setter Property="HeightRequest" Value="72" />
+            <Setter Property="WidthRequest" Value="72" />
+        </Style>
+
+        <Style x:Key="RecentImageStyle" TargetType="Image">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HeightRequest" Value="62" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:VM_About/>
+    </ContentPage.BindingContext>
+
+    <Grid  
+        BackgroundColor="{DynamicResource PrimaryContainerColor}"
+        RowDefinitions="auto, *">
+
+        <!--HEADER--><!--
+        <Grid
+            ColumnDefinitions="Auto, *"
+            Margin="0,0,24,16">
+            <md:IconButton
+                Grid.Column="0"
+                IconKind="ArrowBack"
+                Command="{Binding BackCommand}"
+                EnableTouchEvents="True"
+                Margin="5, 15, 10, 0"
+                Style="{StaticResource StandardIconButtonStyle}"/>
+            --><!--TITLE--><!--
+            <md:Label 
+                Grid.Column="1"
+                Text="About"
+                Style="{StaticResource TitleTextStyle}" />
+        </Grid>-->
+
+        <!--Информация о приложении-->
+        <Grid
+            Grid.Row="1">
+            <BoxView
+                Style="{StaticResource RecentChatAdornerStyle}"/>
+
+            <ScrollView>
+                <VerticalStackLayout  HorizontalOptions="Center" Padding="20,20,20,20" Spacing="15">
+
+                    <!--LOGO-->
+                    <Image Source="test.png" WidthRequest="350" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <md:Label Text="BuzzBuzz" FontSize="50" FontWeight="700" Margin="0,-20,0,0" Style="{StaticResource LogoTitleTextStyle}" HorizontalOptions="Center" />
+
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource FilledCardStyle}">
+                        <VerticalStackLayout Padding="25" Spacing="10">
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">Discover Unity, Find Your Hive!</md:Label>
+                            <md:Label Style="{StaticResource TitleTextStyleSmall}">BuzzBuzz is more than just an app—it's a hive of connections, bringing friends closer no matter where they are. Our distinctive logo, a friendly bee symbolizing unity, encapsulates the essence of BuzzBuzz: staying connected with your swarm.</md:Label>
+                        </VerticalStackLayout>
+                    </md:Card>
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource ElevatedCardStyle}">
+                        <VerticalStackLayout Padding="25" Spacing="10">
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">1. Locate Your Hive:</md:Label>
+                            <md:Label Style="{StaticResource TitleTextStyleSmall}">Ever wondered where your friends are? BuzzBuzz has you covered! Locate your friends in real-time and see where the buzz is.</md:Label>
+                        </VerticalStackLayout>
+                    </md:Card>
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource ElevatedCardStyle}">
+                        <VerticalStackLayout Padding="25" Spacing="10">
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">2. Real-Time Updates:</md:Label>
+                            <md:Label Style="{StaticResource TitleTextStyleSmall}">Stay in the loop with real-time location updates. Whether it's a spontaneous meetup or just checking in, BuzzBuzz keeps you connected.</md:Label>
+                        </VerticalStackLayout>
+                    </md:Card>
+
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource ElevatedCardStyle}">
+                        <VerticalStackLayout Padding="25" Spacing="10">
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">3. Privacy First:</md:Label>
+                            <md:Label Style="{StaticResource TitleTextStyleSmall}">Your privacy matters. BuzzBuzz ensures that location sharing is secure and customizable, giving you control over who sees your buzz.</md:Label>
+                        </VerticalStackLayout>
+                    </md:Card>
+
+
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource ElevatedCardStyle}">
+                        <VerticalStackLayout Padding="25" Spacing="10">
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">4. Bee-autiful User Interface:</md:Label>
+                            <md:Label Style="{StaticResource TitleTextStyleSmall}">Ever wondered where your friends are? BuzzBuzz has you covered! Locate your friends in real-time and see where the buzz is.</md:Label>
+                        </VerticalStackLayout>
+                    </md:Card>
+
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource OutlinedCardStyle}">
+                        <VerticalStackLayout Padding="25" Spacing="10">
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">Developers</md:Label>
+                            <md:Label Style="{StaticResource TitleTextStyleSmall}">The first buzzers who created this application for every buzzer who wants to be part of a friendly and large hive.</md:Label>
+                        </VerticalStackLayout>
+
+                    </md:Card>
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource ElevatedCardStyle}">
+                        <HorizontalStackLayout Padding="25" Spacing="20">
+                            <Grid WidthRequest="70" HeightRequest="70"
+                            Style="{StaticResource RecentImageContainerStyle}">
+                                <Ellipse
+                             Fill="#861b2d"
+                            Style="{StaticResource RecentEllipseStyle}"/>
+                                <Image
+                                    Source="emoji8.png"
+                                    Style="{StaticResource RecentImageStyle}"/>
+                            </Grid>
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">Oleksiy Babchinskyi</md:Label>
+                        </HorizontalStackLayout>
+
+                    </md:Card>
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource ElevatedCardStyle}">
+                        <HorizontalStackLayout Padding="25" Spacing="20">
+                            <Grid WidthRequest="70" HeightRequest="70"
+                            Style="{StaticResource RecentImageContainerStyle}">
+                                <Ellipse
+                             Fill="#438550"
+                            Style="{StaticResource RecentEllipseStyle}"/>
+                                <Image
+                                    Source="emoji9.png"
+                                    Style="{StaticResource RecentImageStyle}"/>
+                            </Grid>
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">Vladyslav Karlinskyi</md:Label>
+                        </HorizontalStackLayout>
+
+                    </md:Card>
+
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource ElevatedCardStyle}">
+                        <HorizontalStackLayout Padding="25" Spacing="20">
+                            <Grid WidthRequest="70" HeightRequest="70"
+                            Style="{StaticResource RecentImageContainerStyle}">
+                                <Ellipse
+                             Fill="#cb9000"
+                            Style="{StaticResource RecentEllipseStyle}"/>
+                                <Image
+                                    Source="emoji4.png"
+                                    Style="{StaticResource RecentImageStyle}"/>
+                            </Grid>
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">Boris Soltanovsky</md:Label>
+                        </HorizontalStackLayout>
+
+                    </md:Card>
+
+                    <md:Card
+                        EnableTouchEvents="True"
+                        Style="{DynamicResource ElevatedCardStyle}">
+                        <HorizontalStackLayout Padding="25" Spacing="20">
+                            <Grid WidthRequest="70" HeightRequest="70"
+                            Style="{StaticResource RecentImageContainerStyle}">
+                                <Ellipse
+                             Fill="#0081c3"
+                            Style="{StaticResource RecentEllipseStyle}"/>
+                                <Image
+                                Source="emoji3.png"
+                                Style="{StaticResource RecentImageStyle}"/>
+                            </Grid>
+                            <md:Label Style="{StaticResource TitleTextStyleBig}">Stanyslav Sova</md:Label>
+                        </HorizontalStackLayout>
+
+                    </md:Card>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+    </Grid>
+</ContentPage>

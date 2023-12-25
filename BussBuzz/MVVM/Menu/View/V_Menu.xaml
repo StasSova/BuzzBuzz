@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BussBuzz.MVVM.Menu.View.V_Menu"
+             
+             xmlns:vm="clr-namespace:BussBuzz.MVVM.Menu.ViewModel"
+             xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+             
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="IconContainerStyle" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="120"/>
+                <Setter Property="WidthRequest" Value="120"/>
+            </Style>
+
+            <Style x:Key="ImageStyle" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="4"/>
+            </Style>
+
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.BindingContext>
+        <vm:VM_Menu/>
+    </ContentView.BindingContext>
+    
+    <Grid
+        RowDefinitions="auto,*">
+        <!--HEADER-->
+        <Grid
+            Grid.Row="0">
+            <!--BACKGROUND-->
+            <md:Card
+                EnableTouchEvents="False"
+                Style="{DynamicResource FilledCardStyle}"
+                Shape="0,0,30,30">
+                <Grid
+                    ColumnDefinitions="auto,auto,*"
+                    Margin="20,30,30,10">
+                    <!--ICON-->
+                    <Grid
+                        Grid.Column="0"
+                        Style="{StaticResource IconContainerStyle}">
+                        <Ellipse 
+                             Fill="{Binding CurrentUser.Color, Converter={StaticResource ColorConverter}}"/>
+                        <Image 
+                            Source="{Binding CurrentUser.Image}"
+                            Style="{StaticResource ImageStyle}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowPopupImageAndColorChangeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                    <!--INFO-->
+                    <Grid
+                        Grid.Column="1"
+                        Margin="20,30,0,0"
+                        RowDefinitions="auto,auto">
+                        <md:Label
+                            Grid.Row="0"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding CurrentUser.Name}"
+                            FontSize="30"
+                            FontWeight="800"/>
+                        <md:Label 
+                            Grid.Row="1"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding CurrentUser.Email}"/>
+
+                    </Grid>
+                    <!--THEME BUTTON-->
+                    <md:IconButton
+                        Grid.Column="2"
+                        Command="{Binding ThemeChangedCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        IconKind="{Binding ThemeIcon}"
+                        Style="{DynamicResource StandardIconButtonStyle}" />
+                </Grid>
+            </md:Card>
+            
+                
+        </Grid>
+        
+        <!--CONTROLS-->
+        <ScrollView
+            Grid.Row="1"
+            Margin="20,10">
+            <VerticalStackLayout
+                Spacing="5"
+                Grid.Row="1">
+                
+                <!--ABOUT THE APPLICATION-->
+                <md:Card
+                    EnableTouchEvents="True"
+                    Command="{Binding MoveToAboutCommand}">
+                    <HorizontalStackLayout>
+                        <md:IconButton
+                            IconKind="Info"
+                            HeightRequest="56"
+                            WidthRequest="56"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                        <md:Label
+                            Text="About the application"
+                            FontSize="16"
+                            EnableTouchEvents="False"/>
+                    </HorizontalStackLayout>
+                </md:Card>
+
+                <!--OFFICIAL NEWS-->
+                <md:Card
+                    EnableTouchEvents="True"
+                    Command="{Binding MoveToOfficialNewsCommand}">
+                    <HorizontalStackLayout>
+                        <md:IconButton
+                            IconKind="Newspaper"
+                            HeightRequest="56"
+                            WidthRequest="56"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                        <md:Label
+                            Text="Official news BuzzBuzz"
+                            FontSize="16"
+                            EnableTouchEvents="False"/>
+                    </HorizontalStackLayout>
+                </md:Card>
+
+
+                <!--MAIN FUNCTIONS-->
+                <!--<md:Card
+                    EnableTouchEvents="True"
+                    Command="{Binding MoveToMainFuncCommand}">
+                    <HorizontalStackLayout>
+                        <md:IconButton
+                            IconKind="Robot"
+                            HeightRequest="56"
+                            WidthRequest="56"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                        <md:Label
+                            Text="Main functions"
+                            FontSize="16"
+                            EnableTouchEvents="False"/>
+                    </HorizontalStackLayout>
+                </md:Card>-->
+
+                
+                <!--SETTINGS-->
+                <!--<md:Card
+                    EnableTouchEvents="True"
+                    Command="{Binding MoveToSettingsCommand}">
+                    <HorizontalStackLayout>
+                        <md:IconButton
+                            IconKind="Settings"
+                            HeightRequest="56"
+                            WidthRequest="56"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                        <md:Label
+                            Text="Settings"
+                            FontSize="16"
+                            EnableTouchEvents="False"/>
+                    </HorizontalStackLayout>
+                </md:Card>-->
+
+                
+                <!--SHARE-->
+                <md:Card
+                    EnableTouchEvents="True"
+                    Command="{Binding MoveToShareCommand}">
+                    <HorizontalStackLayout>
+                        <md:IconButton
+                            IconKind="Share"
+                            HeightRequest="56"
+                            WidthRequest="56"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                        <md:Label
+                            Text="Share"
+                            FontSize="16"
+                            EnableTouchEvents="False"/>
+                    </HorizontalStackLayout>
+                </md:Card>
+
+                
+                <!--FEEDBACK-->
+                <!--<md:Card
+                    EnableTouchEvents="True"
+                    Command="{Binding MoveToFeedbackCommand}">
+                    <HorizontalStackLayout>
+                        <md:IconButton
+                            IconKind="Chat"
+                            HeightRequest="56"
+                            WidthRequest="56"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                        <md:Label
+                            Text="Feedback"
+                            FontSize="16"
+                            EnableTouchEvents="False"/>
+                    </HorizontalStackLayout>
+                </md:Card>-->
+
+
+                <!--EXIT-->
+                <md:Card
+                    BackgroundColour="{DynamicResource ErrorColor}">
+                    <HorizontalStackLayout>
+                        <md:IconButton
+                            IconKind="ExitToApp"
+                            HeightRequest="56"
+                            WidthRequest="56"
+                            ForegroundColor="{DynamicResource OnErrorColor}"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                        <md:Label
+                            Text="Exit"
+                            FontSize="16"
+                            ForegroundColor="{DynamicResource OnErrorColor}"
+                            EnableTouchEvents="False"/>
+                    </HorizontalStackLayout>
+                    <!--COMMAND-->
+                    <md:Card.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ExitCommand}"/>
+                    </md:Card.GestureRecognizers>
+                </md:Card>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentView>

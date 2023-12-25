@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BuzzBuzz.MVVM.Menu.MenuItems.OfficialNews.V_OfficialNews"
+             Title="Official News"
+             
+             xmlns:controls="clr-namespace:BussBuzz.MVVM.Friends.Model"
+             xmlns:vm="clr-namespace:BuzzBuzz.MVVM.Menu.MenuItems.OfficialNews"
+             xmlns:template="clr-namespace:BuzzBuzz.MVVM.Menu.MenuItems.OfficialNews.Templates"
+             xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui">
+
+    <ContentPage.BindingContext>
+        <vm:VM_OfficialNews/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+            <DataTemplate x:Key="NewsItemTemplate">
+                <template:OfficialNewTemplate/>
+            </DataTemplate>
+            
+            <Style x:Key="TitleTextStyle" TargetType="md:Label">
+                <Setter Property="FontSize" Value="48" />
+                <Setter Property="ForegroundColor" Value="{DynamicResource OnPrimaryContainerColor}"/>
+                <Setter Property="FontFamily" Value="Metropolis Medium" />
+                <Setter Property="Margin" Value="18, 15, 0, 0" />
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="RecentChatAdornerStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="{DynamicResource BackgroundColor}" />
+            </Style>
+
+            <Style x:Key="RecentChatCollectionStyle" TargetType="CollectionView">
+                <Setter Property="Margin" Value="12, 24, 12, 0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid  
+            BackgroundColor="{DynamicResource PrimaryContainerColor}"
+            RowDefinitions="auto, *">
+            <!--COLLECTION NEWS-->
+            <Grid
+                Grid.Row="1">
+                <BoxView
+                    Style="{StaticResource RecentChatAdornerStyle}"/>
+                <CollectionView
+                    ItemsSource="{Binding NewsCollection}" 
+                    ItemTemplate="{StaticResource NewsItemTemplate}"
+                    Style="{StaticResource RecentChatCollectionStyle}">
+                </CollectionView>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

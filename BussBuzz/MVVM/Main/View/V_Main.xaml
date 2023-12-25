@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="BussBuzz.MVVM.Main.View.V_Main"
+             
+            xmlns:vm="clr-namespace:BussBuzz.MVVM.Main.ViewModel"
+            xmlns:MapView ="clr-namespace:BussBuzz.MVVM.MAP.View"
+            xmlns:Friends="clr-namespace:BussBuzz.MVVM.Friends.View"
+            xmlns:menu="clr-namespace:BussBuzz.MVVM.Menu.View"
+            xmlns:notification="clr-namespace:BussBuzz.MVVM.Notification.View"
+            
+            xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+            Shell.NavBarIsVisible="False"
+            NavigationPage.HasNavigationBar="False"
+            BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentPage.BindingContext>
+        <vm:VM_Main />
+    </ContentPage.BindingContext>
+
+
+    <md:NavigationBar>
+        <md:NavigationBarItem
+            IconKind="Map"
+            ActiveIndicatorColor="{DynamicResource Blue100Accent}"
+            Text="MAP">
+            <MapView:V_Map/>
+        </md:NavigationBarItem>
+
+        <md:NavigationBarItem
+            IconKind="Group"
+            ActiveIndicatorColor="{DynamicResource Blue100Accent}"
+            Text="FRIENDS">
+            <Friends:V_Friends/>
+        </md:NavigationBarItem>
+
+        <md:NavigationBarItem
+            IconKind="Notifications"
+            ActiveIndicatorColor="{DynamicResource Blue100Accent}"
+            Text="Notifications">
+            <notification:V_NotificationWindow/>
+        </md:NavigationBarItem>
+
+        <md:NavigationBarItem
+            IconKind="Menu"
+            ActiveIndicatorColor="{DynamicResource Blue100Accent}"
+            Text="MENU">
+            <menu:V_Menu/>
+        </md:NavigationBarItem>
+
+    </md:NavigationBar>
+
+</ContentPage>

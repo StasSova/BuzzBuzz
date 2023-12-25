@@ -1,0 +1,211 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+		<OutputType>Exe</OutputType>
+		<RootNamespace>BuzzBuzz</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>BuzzBuzz</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.bussbuzz</ApplicationId>
+		<ApplicationIdGuid>83896bbc-346f-4e36-a0cf-d1112abc28b6</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>0.9</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appiconfg.png" Color="#04A7C9" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="450,450" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Fonts\Brands-Regular-400.otf" />
+	  <None Remove="Resources\Fonts\Regular-400.otf" />
+	  <None Remove="Resources\Fonts\Solid-900.otf" />
+	  <None Remove="Resources\ImageNews\luca-bravo-XJXWbfSo2f0-unsplash.jpg" />
+	  <None Remove="Resources\ImageNews\marvin-meyer-SYTO3xs06fU-unsplash.jpg" />
+	  <None Remove="Resources\ImageNews\news1.jpg" />
+	  <None Remove="Resources\ImageNews\news2.jpg" />
+	  <None Remove="Resources\ImagesApp\BuzzBuzzPro.png" />
+	  <None Remove="Resources\ImagesApp\test.png" />
+	  <None Remove="Resources\Images\car_logo.png" />
+	  <None Remove="Resources\Images\emoji1.png" />
+	  <None Remove="Resources\Images\emoji10.png" />
+	  <None Remove="Resources\Images\emoji2.png" />
+	  <None Remove="Resources\Images\emoji3.png" />
+	  <None Remove="Resources\Images\emoji4.png" />
+	  <None Remove="Resources\Images\emoji5.png" />
+	  <None Remove="Resources\Images\emoji6.png" />
+	  <None Remove="Resources\Images\emoji7.png" />
+	  <None Remove="Resources\Images\emoji8.png" />
+	  <None Remove="Resources\Images\emoji9.png" />
+	  <None Remove="Resources\Images\password_32_p.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoFixture" Version="4.18.0" />
+		<PackageReference Include="ColorPicker.Maui" Version="1.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
+		<PackageReference Include="CommunityToolkit.Maui.Maps" Version="1.0.4" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="FireSharp" Version="2.0.4" />
+		<PackageReference Include="Google.Apis.Auth" Version="1.64.0" />
+		<PackageReference Include="Google.Apis.Gmail.v1" Version="1.64.0.3231" />
+		<PackageReference Include="Material.Components.Maui" Version="0.1.2-beta" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
+		<PackageReference Include="MongoDB.Bson" Version="2.22.0" />
+		<PackageReference Include="MongoDB.Driver" Version="2.22.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="PINView.MAUI" Version="1.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="MVVM\Authorization\View\V_SignIn.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Friends\View\Templates\V_Templ_Friend.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Friends\View\Templates\V_Templ_FriendRequestRecipient.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Friends\View\Templates\V_Templ_FriendRequestSender.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Friends\View\Templates\V_Templ_RegularUser.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Friends\View\V_Friends.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\ImageColor\V_ImageColor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\MenuItems\About\V_About.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\MenuItems\Feedback\V_Feedback.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\MenuItems\MainFunc\V_MainFunc.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\MenuItems\OfficialNews\Details\V_IfficialNewDetails.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\MenuItems\OfficialNews\Templates\OfficialNewTemplate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\MenuItems\OfficialNews\V_OfficialNews.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\MenuItems\Settings\V_Settings.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\MenuItems\Share\V_Share.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Menu\View\V_Menu.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Notification\View\Templates\V_Notification_AddRequest.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Notification\View\Templates\V_Notification_CancellationFriend.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Notification\View\Templates\V_Notification_ConfirmFriend.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Notification\View\Templates\V_Notification_RemoveFriend.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\ResetPassword\View\V_RecoverPasswordCode.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\ResetPassword\View\V_RecoverPasswordEmail.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\ResetPassword\View\V_RecoverPasswordNewPassword.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Main\View\V_Main.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="MVVM\Authorization\View\V_SignIn.xaml.cs">
+	    <DependentUpon>V_SignIn.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="MVVM\Authorization\View\V_SignUp.xaml.cs">
+	    <DependentUpon>V_SignUp.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="MVVM\Main\View\V_Main.xaml.cs">
+	    <DependentUpon>V_Main.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="MVVM\Menu\View\V_Menu.xaml.cs">
+	    <DependentUpon>V_Menu.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="MVVM\Notification\View\V_NotificationWindow.xaml.cs">
+	    <DependentUpon>V_NotificationWindow.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="MVVM\ResetPassword\View\V_RecoverPasswordCode.xaml.cs">
+	    <DependentUpon>V_RecoverPasswordCode.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="MVVM\ResetPassword\View\V_RecoverPasswordEmail.xaml.cs">
+	    <DependentUpon>V_RecoverPasswordEmail.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\ImageNews\news1.jpg" />
+	  <MauiImage Include="Resources\ImageNews\news2.jpg" />
+	  <MauiImage Include="Resources\ImagesApp\car_logo.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\ImagesApp\buzzbuzzpro.png" />
+	  <MauiImage Include="Resources\ImagesApp\test.png" />
+	</ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>..\key.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>Testtest21</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>key</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>Testtest21</AndroidSigningKeyPass>
+  </PropertyGroup>
+
+</Project>

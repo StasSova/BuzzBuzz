@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:BussBuzz.MVVM.Authorization.ViewModel"
+             x:Class="BussBuzz.MVVM.Authorization.V_SignIn"
+             
+             xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentPage.BindingContext>
+        <viewModel:VM_SignIn />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+
+        <VerticalStackLayout
+          Spacing="25"
+          Padding="30,0"
+          VerticalOptions="Center">
+
+            <Grid Margin="0,0,0,0">
+                <Image Source="test.png"
+                       HeightRequest="250" 
+                       WidthRequest="450" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Grid>
+
+            <!--WELCOME TEXT-->
+            <VerticalStackLayout Spacing="5">
+                <md:Label 
+                    Text="Sign In" 
+                    FontSize="30"
+                    Style="{StaticResource DefaultLabelStyle}"/>
+                <md:Label 
+                    Text="Please Sign in to your Account to Continue" 
+                    FontSize="16"
+                    Style="{StaticResource DefaultLabelStyle}"/>
+            </VerticalStackLayout>
+
+            <!--INPUT DATE-->
+            <VerticalStackLayout Spacing="10">
+                <!--USER NAME-->
+                <md:Card
+                    EnableTouchEvents="False"
+                    Style="{DynamicResource OutlinedCardStyle}"
+                    Shape="3">
+                    <Grid
+                        ColumnDefinitions="auto,*,auto">
+                        <md:IconButton
+                            Grid.Column="0"
+                            IconKind="Person"
+                            Margin="7"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+
+                        <Entry
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            FontSize="Medium"
+                            Text="{Binding Name}"/>
+                    </Grid>
+                </md:Card>
+                
+                
+                <!--PASSWORD-->
+                <md:Card
+                    EnableTouchEvents="False"
+                    Style="{DynamicResource OutlinedCardStyle}"
+                    Shape="3">
+                    <Grid
+                        ColumnDefinitions="auto,*,auto">
+                        <md:IconButton
+                            Grid.Column="0"
+                            IconKind="Lock"
+                            Margin="7"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+
+                        <Entry
+                            x:Name="PasswordEntry"
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            FontSize="Medium"
+                            IsPassword="{Binding Secret}"
+                            Text="{Binding Password}"/>
+
+                        <md:IconButton
+                            Grid.Column="2"
+                            Margin="0,0,5,0"
+                            IconKind="{Binding Kind, Mode=TwoWay}"
+                            Command="{Binding ChangeVisiblePasswordCommand}"
+                            EnableTouchEvents="True"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                    </Grid>
+                </md:Card>
+            </VerticalStackLayout>
+            
+            <!--FORGOT PASSWORD-->
+            <Grid Margin="0,-20,0,0"
+                  ColumnDefinitions="auto,auto,*">
+                
+                <md:CheckBox 
+                    Grid.Column="0"
+                    IsChecked="{Binding Remember, Mode=TwoWay}"/>
+                <md:Label
+                    Grid.Column="1"
+                    Text="Remember me?"/>
+                
+                <md:Button 
+                    Grid.Column="2"
+                    HorizontalOptions="End"
+                    Text="Forgot password?"
+                    Style="{StaticResource TextButtonStyle}"
+                    Command="{Binding ForgotPasswordCommand}"/>
+            </Grid>
+
+            <!--SIGN IN-->
+            <md:Button 
+                Style="{DynamicResource FilledButtonStyle}" 
+                Text="SIGN IN"
+                IsEnabled="{Binding IsEnableToSignIn}"
+                Command="{Binding SignInCommand}"/>
+
+            <!--SIGN UP-->
+            <StackLayout 
+                Orientation="Horizontal" 
+                Spacing="5" 
+                HorizontalOptions="Center">
+                <md:Label 
+                    Text="Don`t have account?" 
+                    Style="{StaticResource DefaultLabelStyle}"/>
+                <md:Label 
+                    Text="Sign Up" 
+                    Style="{StaticResource ActiveLabelStyle}">
+                    <md:Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
+                    </md:Label.GestureRecognizers>
+                </md:Label>
+            </StackLayout>
+    
+            <!--ICONS-->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="50" Margin="0,-10,0,20">
+                <md:IconButton IconKind="RoomService" IsEnabled="False" Style="{StaticResource FilledIconButtonStyle}" />
+                <md:IconButton IconKind="RoomService" IsEnabled="False" Style="{StaticResource FilledIconButtonStyle}" />
+                <md:IconButton IconKind="RoomService" IsEnabled="False" Style="{StaticResource FilledIconButtonStyle}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

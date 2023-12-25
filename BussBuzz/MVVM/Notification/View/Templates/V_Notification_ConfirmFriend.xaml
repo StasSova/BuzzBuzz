@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BussBuzz.MVVM.Notification.View.Templates.V_Notification_ConfirmFriend"         xmlns:viewmodel="clr-namespace:BussBuzz.MVVM.Notification.ViewModel"
+         xmlns:converter="clr-namespace:BussBuzz.Services"
+         xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui">
+
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="RecentImageContainerStyle" TargetType="Grid">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="72" />
+                <Setter Property="WidthRequest" Value="72" />
+            </Style>
+
+            <Style x:Key="RecentEllipseStyle" TargetType="Ellipse">
+                <Setter Property="HeightRequest" Value="72" />
+                <Setter Property="WidthRequest" Value="72" />
+            </Style>
+
+            <Style x:Key="RecentImageStyle" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="62" />
+                <Setter Property="Margin" Value="10" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid
+     ColumnDefinitions="Auto, *, auto"
+     RowSpacing="0"
+     Margin="12, 24">
+            <!--ICON FRIEND-->
+            <Grid
+         Style="{StaticResource RecentImageContainerStyle}">
+                <Ellipse
+             Fill="{Binding User.Color, Converter={StaticResource ColorConverter}}"
+             Style="{StaticResource RecentEllipseStyle}"/>
+                <Image
+             Source="{Binding User.Image}"
+             Style="{StaticResource RecentImageStyle}"/>
+            </Grid>
+
+            <!--information-->
+            <Grid
+         Grid.Column="1"
+         Padding="16,0,16,0"
+         RowDefinitions="auto, *">
+                <md:Label
+                 Grid.Row="0"
+                 FontSize="20"
+                 FontWeight="600"
+                 Text="{Binding User.Name}"
+                 HorizontalOptions="Start"
+                 Style="{DynamicResource DefaultLabelStyle}"/>
+                <md:Label
+                 Grid.Row="1"
+                 FontSize="18"
+                 Text="{Binding Message}"
+                 HorizontalOptions="Start"
+                 Style="{DynamicResource DefaultLabelStyle}"/>
+            </Grid>
+
+            <!--TIME-->
+            <Grid
+         Grid.Column="2"
+         RowDefinitions="auto,*">
+                <md:Label
+                 Grid.Row="0"
+                 FontSize="12"
+                 Text="{Binding DateAndTime}"
+                 HorizontalOptions="End"
+                 VerticalOptions="Start"
+                 Style="{DynamicResource DefaultLabelStyle}"/>
+
+                <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Orientation="Horizontal">
+
+                    <md:IconButton
+                     Grid.Column="2"
+                     Style="{StaticResource FilledIconButtonStyle}"
+                     IconKind="Done"
+                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VM_NotificationWindow}}, Path=ImReadTheNotifyCommand}" 
+                     CommandParameter="{Binding .}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

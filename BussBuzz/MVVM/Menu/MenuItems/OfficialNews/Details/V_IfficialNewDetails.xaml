@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BuzzBuzz.MVVM.Menu.MenuItems.OfficialNews.Details.V_IfficialNewDetails"
+             
+             xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+             xmlns:vm="clr-namespace:BuzzBuzz.MVVM.Menu.MenuItems.OfficialNews.Details"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:VM_OfficialNewDetails/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TitleTextStyle" TargetType="md:Label">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="ForegroundColor" Value="{DynamicResource OnPrimaryContainerColor}"/>
+                <Setter Property="FontFamily" Value="Metropolis Medium" />
+                <Setter Property="Margin" Value="8, 15, 0, 18" />
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="DescrTextStyle" TargetType="md:Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Padding" Value="18, 0, 18, 18"/>
+                <Setter Property="ForegroundColor" Value="{DynamicResource OnPrimaryContainerColor}"/>
+                <Setter Property="FontFamily" Value="Metropolis Medium" />
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="DateTextStyle" TargetType="md:Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Margin" Value="8, 15, 0, 18" />
+                <Setter Property="ForegroundColor" Value="{DynamicResource OnPrimaryContainerColor}"/>
+                <Setter Property="FontFamily" Value="Metropolis Medium" />
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <VerticalStackLayout>
+            <Image 
+                Source="{Binding Image}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <md:Label
+                Text="{Binding Date}"
+                Style="{StaticResource DateTextStyle}"/>
+
+            <md:Label
+                Text="{Binding Description}"
+                Style="{StaticResource DescrTextStyle}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

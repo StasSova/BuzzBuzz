@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:BussBuzz.MVVM.MAP.Model"
+             xmlns:DataType ="clr-namespace:BussBuzz.MVVM.MAP.ViewModell"
+             xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             Loaded="ContentView_Loaded"
+             x:Class="BussBuzz.MVVM.MAP.View.V_Map">
+
+    <Grid>
+        <Map
+            x:Name="MyMap"
+            ItemsSource="{Binding LocationPins}">
+            <Map.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type DataType:VM_LocationPin}">
+                    <models:CustomPin
+						Location="{Binding Location}"
+	                    Label="{Binding User.Name}"
+	                    ImageSource="{Binding User.Image}"
+	                    Type="Place"/>
+                </DataTemplate>
+            </Map.ItemTemplate>
+        </Map>
+        <VerticalStackLayout
+            Margin="0,12,12,0"
+            Spacing="12"
+            VerticalOptions="Start"
+            HorizontalOptions="End">
+            <md:IconButton
+                IconKind="MyLocation"
+                HeightRequest="38"
+                WidthRequest="38"
+                Shape="None"
+                Clicked="IconButton_Clicked"
+                Command="{Binding StartRealTimeLocationTrackerCommand}"
+                Style="{StaticResource FilledTonalIconButtonStyle}"/>
+            
+            <md:IconButton
+                IconKind="{Binding Kind, Mode=TwoWay}"
+                HeightRequest="38"
+                WidthRequest="38"
+                Shape="None"
+                Command="{Binding ShareLocationToFriendCommand}"
+                Style="{StaticResource FilledTonalIconButtonStyle}"/>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentView>

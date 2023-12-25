@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:BussBuzz.MVVM.Authorization.ViewModel"
+             x:Class="BussBuzz.MVVM.Authorization.V_SignUp"
+
+             xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+
+    <ContentPage.BindingContext>
+        <viewModel:VM_SignUp />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+
+        <VerticalStackLayout
+                    Spacing="25"
+                    Padding="30,0"
+                    VerticalOptions="Center">
+
+            <Grid Margin="0,0,0,-30">
+                <Image 
+                    Source="test.png" 
+                    HeightRequest="250" 
+                    WidthRequest="450" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center"/>
+            </Grid>
+
+            <!--WELCOME TEXT-->
+            <VerticalStackLayout Spacing="5">
+                <md:Label 
+                    Text="Sign Up" 
+                    FontSize="30"
+                    Style="{StaticResource DefaultLabelStyle}"/>
+                <md:Label 
+                    Text="Please Sign Up to your Account to Continues" 
+                    FontSize="16"
+                    Style="{StaticResource DefaultLabelStyle}"/>
+            </VerticalStackLayout>
+
+            <!--INPUT DATE-->
+            <VerticalStackLayout Spacing="10">
+                <!--USER NAME-->
+                <md:Card
+                    EnableTouchEvents="False"
+                    Style="{DynamicResource OutlinedCardStyle}"
+                    Shape="3">
+                    <Grid
+                        ColumnDefinitions="auto,*,auto">
+                        <md:IconButton
+                            Grid.Column="0"
+                            IconKind="Person"
+                            Margin="7"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+
+                        <Entry
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            FontSize="Medium"
+                            Placeholder="Name"
+                            Text="{Binding Name}"/>
+
+                        <!--<md:IconButton
+                            Grid.Column="2"
+                            IconKind="Close"
+                            Margin="7"
+                            EnableTouchEvents="True"
+                            Style="{StaticResource StandardIconButtonStyle}"/>-->
+                    </Grid>
+                </md:Card>
+
+                <!--USER EMAIL-->
+                <md:Card
+                    EnableTouchEvents="False"
+                    Style="{DynamicResource OutlinedCardStyle}"
+                    Shape="3">
+                    <Grid
+                        ColumnDefinitions="auto,*,auto">
+                        <md:IconButton
+                            Grid.Column="0"
+                            IconKind="Mail"
+                            Margin="7"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+
+                        <Entry
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            FontSize="Medium"
+                            Placeholder="Email"
+                            Text="{Binding Email}"/>
+
+                        <!--<md:IconButton
+                            Grid.Column="2"
+                            IconKind="Close"
+                            Margin="7"
+                            EnableTouchEvents="True"
+                            Style="{StaticResource StandardIconButtonStyle}"/>-->
+                    </Grid>
+                </md:Card>
+
+                <!--PASSWORD-->
+                <md:Card
+                    EnableTouchEvents="False"
+                    Style="{DynamicResource OutlinedCardStyle}"
+                    Shape="3">
+                    <Grid
+                        ColumnDefinitions="auto,*,auto">
+                        <md:IconButton
+                            Grid.Column="0"
+                            IconKind="Lock"
+                            Margin="7"
+                            EnableTouchEvents="False"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+
+                        <Entry
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            FontSize="Medium"
+                            Placeholder="Password"
+                            IsTextPredictionEnabled="True"
+                            IsPassword="{Binding Secret}"
+                            Text="{Binding Password}"/>
+
+                        <md:IconButton
+                            Grid.Column="2"
+                            IconKind="{Binding Kind, Mode=TwoWay}"
+                            EnableTouchEvents="True"
+                            Margin="0,0,5,0"
+                            Command="{Binding ChangeVisiblePasswordCommand}"
+                            Style="{StaticResource StandardIconButtonStyle}"/>
+                    </Grid>
+                </md:Card>
+
+                <HorizontalStackLayout
+                    Margin="0,-10,0,-10">
+                    <md:CheckBox 
+                        IsChecked="{Binding Remember, Mode=TwoWay}"/>
+                    <md:Label
+                        Text="Remember me?"/>
+                </HorizontalStackLayout>
+            
+            </VerticalStackLayout>
+
+            <!--SIGN UP-->
+            <md:Button 
+                Style="{DynamicResource FilledButtonStyle}" 
+                Text="SIGN UP">
+                <md:Button.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
+                </md:Button.GestureRecognizers>
+            </md:Button>
+
+            <!--SIGN IN-->
+            <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Center" Margin="0,-12,0,0">
+                <md:Label Text="Already have an account?" Style="{StaticResource DefaultLabelStyle}"/>
+                <md:Label 
+                    Text="Sign In" 
+                    Style="{StaticResource ActiveLabelStyle}">
+                   <md:Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SignInCommand}"/>
+                    </md:Label.GestureRecognizers>
+                </md:Label>
+            </StackLayout>
+
+            <!--ICONS-->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="50" Margin="0,-10,0,20">
+                <md:IconButton IconKind="RoomService" IsEnabled="False" Command="{Binding GoogleRegCommand}" Style="{StaticResource FilledIconButtonStyle}" />
+                <md:IconButton IconKind="RoomService" IsEnabled="False" Style="{StaticResource FilledIconButtonStyle}" />
+                <md:IconButton IconKind="RoomService" IsEnabled="False" Style="{StaticResource FilledIconButtonStyle}" />
+            </HorizontalStackLayout>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

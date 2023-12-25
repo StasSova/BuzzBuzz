@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BussBuzz.MVVM.Friends.View.V_Friends"
+             
+             xmlns:md="clr-namespace:Material.Components.Maui;assembly=Material.Components.Maui"
+             xmlns:templates="clr-namespace:BussBuzz.MVVM.Friends.View.Templates"
+             xmlns:viewmodel="clr-namespace:BussBuzz.MVVM.Friends.ViewModel"
+             xmlns:controls="clr-namespace:BussBuzz.MVVM.Friends.Model"
+             xmlns:temp ="clr-namespace:BussBuzz.MVVM.Friends.View.Templates"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+
+            <DataTemplate x:Key="Friend">
+                <temp:V_Templ_Friend/>
+            </DataTemplate>
+            <DataTemplate x:Key="FriendRequestSender">
+                <temp:V_Templ_FriendRequestSender/>
+            </DataTemplate>
+            <DataTemplate x:Key="FriendRequestRecipient">
+                <temp:V_Templ_FriendRequestRecipient/>
+            </DataTemplate>
+            <DataTemplate x:Key="RegularUser">
+                <temp:V_Templ_RegularUser/>
+            </DataTemplate>
+
+
+            <controls:M_FriendTemplateSelector 
+                x:Key="FriendTemplateSelector"
+                FriendTemplate="{StaticResource Friend}"
+                FriendRequestRecipientTemplate="{StaticResource FriendRequestRecipient}"
+                FriendRequestSenderTemplate="{StaticResource FriendRequestSender}"
+                RegularUserTemplate="{StaticResource RegularUser}"/>
+
+            <Style x:Key="TitleTextStyle" TargetType="md:Label">
+                <Setter Property="FontSize" Value="48" />
+                <Setter Property="ForegroundColor" Value="{DynamicResource OnPrimaryContainerColor}"/>
+                <Setter Property="FontFamily" Value="Metropolis Medium" />
+                <Setter Property="Margin" Value="18, 15, 0, 0" />
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="SuggestedContainerStyle" TargetType="Grid">
+            </Style>
+
+            <Style x:Key="SearchContainerStyle" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="52" />
+                <Setter Property="WidthRequest" Value="52" />
+                <Setter Property="Margin" Value="0, 0, 12, 0" />
+            </Style>
+
+
+            <Style x:Key="RecentChatCollectionStyle" TargetType="CollectionView">
+                <Setter Property="Margin" Value="12, 24, 12, 0" />
+            </Style>
+
+            <Style x:Key="RecentChatAdornerStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="{DynamicResource BackgroundColor}" />
+                <Setter Property="CornerRadius" Value="18, 18, 0, 0" />
+            </Style>
+
+            <Style x:Key="ChatEntryContainerStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundColor}" />
+
+                <Setter Property="HeightRequest" Value="56" />
+                <Setter Property="CornerRadius" Value="32" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="4" />
+                <Setter Property="Margin" Value="12,12,12,24" />
+            </Style>
+            <Style x:Key="ChatEntryStyle" TargetType="controls:BorderlessEntry">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="TextColor" Value="{DynamicResource OnBackgroundColor}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="66, 0, 15, 0" />
+                <Setter Property="PlaceholderColor" Value="{DynamicResource InversePrimaryColor}"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid  
+            BackgroundColor="{DynamicResource PrimaryContainerColor}"
+            RowDefinitions="auto, *">
+
+            <!--HEADER-->
+            <Grid
+                RowDefinitions="Auto, auto">
+                <!--TITLE-->
+                <md:Label 
+                    Text="Friends"
+                    Style="{StaticResource TitleTextStyle}" />
+                <!--ENTRY-->
+                <Frame
+                    Grid.Row="1"
+                    Style="{StaticResource ChatEntryContainerStyle}">
+                    <Grid
+                        ColumnDefinitions="*, Auto">
+                        <controls:BorderlessEntry
+                            Placeholder="Search friend..."
+                            Text="{Binding SearchedName}"
+                            Style="{StaticResource ChatEntryStyle}"/>
+                        <!--SEARCH BUTTON-->
+                        <md:IconButton
+                            Margin="3,0,20,0"
+                            HorizontalOptions="Start"
+                            HeightRequest="45"
+                            WidthRequest="45"
+                            Grid.Column="0"
+                            IconKind="Search"
+                            Command="{Binding SearchComamnd}"
+                            Style="{StaticResource FilledIconButtonStyle}">
+                        </md:IconButton>
+                    </Grid>
+                </Frame>
+            </Grid>
+                
+            <!--ДРУЗЬЯ И ДРУГИЕ ЛЮДИ-->
+            <Grid
+                Grid.Row="1">
+                <BoxView
+                    Style="{StaticResource RecentChatAdornerStyle}"/>
+                <RefreshView
+                    IsRefreshing="{Binding IsRefreshing}"
+                    Command="{Binding RefreshCommand}">
+                    <CollectionView
+                        ItemsSource="{Binding DisplayedCollectionUser}" 
+                        ItemTemplate="{StaticResource FriendTemplateSelector}"
+                        Style="{StaticResource RecentChatCollectionStyle}">
+                    </CollectionView>
+                </RefreshView>
+                
+            </Grid>
+            
+        </Grid>
+    </ContentView.Content>
+
+
+
+</ContentView>
